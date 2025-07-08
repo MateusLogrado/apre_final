@@ -33,8 +33,10 @@ button.addEventListener("click", (e) => {
     <td>${val.matricula}</td>
     <td>${val.telefone}</td>
     <td>${val.email}</td>
-  </tr>`
+  </tr></table>`
             });
         })
-    res.innerHTML += `</table>`
+    .catch((err)=>{
+        console.error("Erro: ", err)
+    })
 })

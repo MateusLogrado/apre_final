@@ -83,4 +83,7 @@ buscar.addEventListener("click", (e)=>{
             })
 
     })
+    .catch((err)=>{
+        console.error("Erro: ", err)
+    })
 })

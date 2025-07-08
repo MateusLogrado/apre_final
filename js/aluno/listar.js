@@ -35,4 +35,7 @@ button.addEventListener("click", (e) => {
             });
         })
     res.innerHTML += `</table>`
+    .catch((err)=>{
+        console.error("Erro: ", err)
+    })
 })

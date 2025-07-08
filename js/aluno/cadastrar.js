@@ -46,4 +46,7 @@ e.preventDefault()
   </tr>
 </table>`
         })
+        .catch((err)=>{
+          console.error("Erro: ", err)
+      })
 })
