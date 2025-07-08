@@ -4,16 +4,7 @@ let button = document.getElementById("button")
 button.addEventListener("click", (e) => {
     e.preventDefault()
 
-    res.innerHTML = `<table>
-    <tr>
-      <th>Nome</th>
-      <th>Sobrenome</th>
-      <th>Matricula</th>
-      <th>Telefone</th>
-      <th>Email</th>
-    </tr>`
 
-    res.innerHTML = ""
 
     fetch("http://localhost:8081/professor", {
         method: "GET",
@@ -23,19 +14,28 @@ button.addEventListener("click", (e) => {
     })
         .then(resp => resp.json())
         .then(valores => {
-
+            let html = `<table>
+                <tr>
+                    <th>Nome</th>
+                    <th>Sobrenome</th>
+                    <th>Matricula</th>
+                    <th>Telefone</th>
+                    <th>Email</th>
+                </tr>`
+        
             valores.forEach(val => {
-                res.innerHTML += `  <tr>
-    <td>${val.nome}</td>
-    <td>${val.sobrenome}</td>
-    <td>${val.matricula}</td>
-    <td>${val.telefone}</td>
-    <td>${val.email}</td>
-  </tr>`
+                html += `<tr>
+                    <td>${val.nome}</td>
+                    <td>${val.sobrenome}</td>
+                    <td>${val.matricula}</td>
+                    <td>${val.telefone}</td>
+                    <td>${val.email}</td>
+                </tr>`
             });
+        
+            html += `</table>`
+            res.innerHTML = html
         })
-    res.innerHTML += `</table>`
-    
     .catch((err)=>{
         console.error("Erro: ", err)
     })

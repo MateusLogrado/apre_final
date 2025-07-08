@@ -6,7 +6,7 @@ button.addEventListener("click", (e) => {
     e.preventDefault()
 
 
-    let codAluno = Number(document.getElementById("id").value)
+    let codProfessor = Number(document.getElementById("id").value)
     let nome = document.getElementById("nome").value
     let sobrenome = document.getElementById("sobrenome").value
     let matricula = Number(document.getElementById("matricula").value)
@@ -24,7 +24,7 @@ button.addEventListener("click", (e) => {
 
     res.innerHTML = ""
 
-    fetch(`http://localhost:8081/aluno/${codAluno}`, {
+    fetch(`http://localhost:8081/professor/${codProfessor}`, {
         method: "PUT",
         headers: {
             "Content-Type": "Application/JSON"
@@ -55,7 +55,7 @@ button.addEventListener("click", (e) => {
 buscar.addEventListener("click", (e)=>{
     e.preventDefault()
 
-    let codAluno = Number(document.getElementById("id").value)
+    let codProfessor = Number(document.getElementById("id").value)
 
     let nome = document.getElementById("nome")
     let sobrenome = document.getElementById("sobrenome")
@@ -65,20 +65,24 @@ buscar.addEventListener("click", (e)=>{
 
     res.innerHTML = ""
 
-    fetch(`http://localhost:8081/aluno/${codAluno}`, {
+    fetch(`http://localhost:8081/professor/${codProfessor}`, {
         method: "GET",
         headers: {
             "Content-Type": "Application/JSON"
         }
     })
         .then(resp => resp.json())
-        .then(val => {
-            nome.value = val.nome
-            sobrenome.value = val.sobrenome
-            matricula.value = val.matricula
-            telefone.value = val.telefone
-            email.value = val.email
-        })
+        .then(valores => {
+
+            valores.forEach(val => {
+                nome.value = val.nome
+                sobrenome.value = val.sobrenome
+                matricula.value = val.matricula
+                telefone.value = val.telefone
+                email.value = val.email
+            })
+
+    })
     .catch((err)=>{
         console.error("Erro: ", err)
     })
