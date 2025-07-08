@@ -1,7 +1,8 @@
 let res = document.getElementById("res")
 let button = document.getElementById("button")
 
-button.addEventListener("click", () => {
+button.addEventListener("click", (e) => {
+    e.preventDefault()
 
     res.innerHTML = `<table>
     <tr>

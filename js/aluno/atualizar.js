@@ -1,9 +1,12 @@
 let res = document.getElementById("res")
 let button = document.getElementById("button")
+let buscar = document.getElementById("buscar")
 
 button.addEventListener("click", (e) => {
-e.preventDefault()
+    e.preventDefault()
 
+
+    let codAluno = Number(document.getElementById("codAluno").value)
     let nome = document.getElementById("nome").value
     let sobrenome = document.getElementById("sobrenome").value
     let matricula = Number(document.getElementById("matricula").value)
@@ -11,6 +14,7 @@ e.preventDefault()
     let email = document.getElementById("email").value
 
     const valores = {
+        codAluno: codAluno,
         nome: nome,
         sobrenome: sobrenome,
         matricula: matricula,
@@ -21,7 +25,7 @@ e.preventDefault()
     res.innerHTML = ""
 
     fetch("http://localhost:8081/aluno", {
-        method: "POST",
+        method: "PUT",
         headers: {
             "Content-Type": "Application/JSON"
         },
@@ -46,4 +50,37 @@ e.preventDefault()
   </tr>
 </table>`
         })
+})
+
+buscar.addEventListener("click", (e)=>{
+    e.preventDefault()
+
+    let codAluno = Number(document.getElementById("id").value)
+
+    let nome = document.getElementById("nome")
+    let sobrenome = document.getElementById("sobrenome")
+    let matricula = document.getElementById("matricula")
+    let telefone = document.getElementById("telefone")
+    let email = document.getElementById("email")
+
+    res.innerHTML = ""
+
+    fetch(`http://localhost:8081/aluno/${codAluno}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "Application/JSON"
+        }
+    })
+        .then(resp => resp.json())
+        .then(valores => {
+
+            valores.forEach(val => {
+                nome.value = val.nome
+                sobrenome.value = val.sobrenome
+                matricula.value = val.matricula
+                nome.value = val.nome
+                nome.value = val.nome
+            })
+
+    })
 })

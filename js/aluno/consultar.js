@@ -1,9 +1,10 @@
 let res = document.getElementById("res")
 let button = document.getElementById("button")
 
-button.addEventListener("click", () => {
+button.addEventListener("click", (e) => {
+    e.preventDefault()
 
-    let codAluno = document.getElementById("id")
+    let codAluno = Number(document.getElementById("id").value)
 
     res.innerHTML = `<table>
     <tr>
