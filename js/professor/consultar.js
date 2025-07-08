@@ -24,17 +24,23 @@ button.addEventListener("click", (e) => {
         }
     })
         .then(resp => resp.json())
-        .then(valores => {
-
-            valores.forEach(val => {
-                res.innerHTML += `  <tr>
-    <td>${val.nome}</td>
-    <td>${val.sobrenome}</td>
-    <td>${val.matricula}</td>
-    <td>${val.telefone}</td>
-    <td>${val.email}</td>
-  </tr></table>`
-            });
+        .then(val => {
+            res.innerHTML = `<table>
+                <tr>
+                    <th>Nome</th>
+                    <th>Sobrenome</th>
+                    <th>Matricula</th>
+                    <th>Telefone</th>
+                    <th>Email</th>
+                </tr>
+                <tr>
+                    <td>${val.nome}</td>
+                    <td>${val.sobrenome}</td>
+                    <td>${val.matricula}</td>
+                    <td>${val.telefone}</td>
+                    <td>${val.email}</td>
+                </tr>
+            </table>`
         })
     .catch((err)=>{
         console.error("Erro: ", err)

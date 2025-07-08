@@ -14,7 +14,7 @@ button.addEventListener("click", (e) => {
     let email = document.getElementById("email").value
 
     const valores = {
-        codAluno: codAluno,
+        codProfessor: codProfessor,
         nome: nome,
         sobrenome: sobrenome,
         matricula: matricula,
@@ -24,7 +24,7 @@ button.addEventListener("click", (e) => {
 
     res.innerHTML = ""
 
-    fetch(`http://localhost:8081/professor/${codProfessor}`, {
+    fetch(`http://localhost:8081/aluno/${codProfessor}`, {
         method: "PUT",
         headers: {
             "Content-Type": "Application/JSON"
@@ -55,7 +55,7 @@ button.addEventListener("click", (e) => {
 buscar.addEventListener("click", (e)=>{
     e.preventDefault()
 
-    let codProfessor = Number(document.getElementById("id").value)
+    let codAluno = Number(document.getElementById("id").value)
 
     let nome = document.getElementById("nome")
     let sobrenome = document.getElementById("sobrenome")
@@ -65,24 +65,20 @@ buscar.addEventListener("click", (e)=>{
 
     res.innerHTML = ""
 
-    fetch(`http://localhost:8081/professor/${codProfessor}`, {
+    fetch(`http://localhost:8081/aluno/${codAluno}`, {
         method: "GET",
         headers: {
             "Content-Type": "Application/JSON"
         }
     })
         .then(resp => resp.json())
-        .then(valores => {
-
-            valores.forEach(val => {
-                nome.value = val.nome
-                sobrenome.value = val.sobrenome
-                matricula.value = val.matricula
-                telefone.value = val.telefone
-                email.value = val.email
-            })
-
-    })
+        .then(val => {
+            nome.value = val.nome
+            sobrenome.value = val.sobrenome
+            matricula.value = val.matricula
+            telefone.value = val.telefone
+            email.value = val.email
+        })
     .catch((err)=>{
         console.error("Erro: ", err)
     })
