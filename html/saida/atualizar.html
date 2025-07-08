@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../style.css">
+    <title>Cadastrar</title>
+</head>
+<body>
+    <h1>Cadstrar de Saidas</h1>
+    <a href="../saida.html" id="link">Voltar</a>
+    <form>
+        <label for="codSaida">Digite o codido da saida</label><br>
+        <input type="number" id="codSaida"><br><br>
+
+        <button id="buscar">Buscar</button> <br><br>
+
+        <label for="dataSolicitacao">Digite a data de solitação</label><br>
+        <input type="date" id="dataSolicitacao"><br><br>
+        <label for="horaSaida">Digite o horario da saida</label><br>
+        <input type="time" id="horaSaida"><br><br>
+        <label for="horaRetorno">Digite o horario que o aluno retornou</label><br>
+        <input type="time" id="horaRetorno"><br><br>
+        <label for="motivo">Digite o motivo da saida</label><br>
+        <input type="text" id="motivo" placeholder="Exemplo: saiu para o banheiro"><br><br>
+        <label for="localDestino">Digite o local que o aluno foi</label><br>
+        <input type="text" id="localDestino" placeholder="Exemplo: banheiro ao lado do lab 4.0"><br><br>
+        <label for="status">Digite o status da saida</label><br>
+        <input type="text" id="status" placeholder="Exemplo: voltou"><br><br>
+        <label for="nomeAluno">Digite o nome do aluno</label><br>
+        <input type="text" id="nomeAluno" placeholder="Exemplo: Ellen"><br><br>
+        <label for="aluno_id">Digite o codigo do aluno</label><br>
+        <input type="number" id="aluno_id"><br><br>   
+        <label for="nomeProfessor">Digite o nome do professor</label><br>
+        <input type="text" id="nomeProfessor" placeholder="Exemplo: Lycaon"><br><br>
+        <label for="professor_id">Digite o codigo do professor</label><br>
+        <input type="number" id="professor_id"><br><br>
+        <button id="button">Cadastrar</button>
+    </form>
+    <div id="res"></div>
+</body>
+</html>
