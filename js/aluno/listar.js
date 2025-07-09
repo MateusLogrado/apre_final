@@ -16,6 +16,7 @@ button.addEventListener("click", (e) => {
         .then(valores => {
             let html = `<table>
                 <tr>
+                    <th>Codigo</th>
                     <th>Nome</th>
                     <th>Sobrenome</th>
                     <th>Matricula</th>
@@ -25,6 +26,7 @@ button.addEventListener("click", (e) => {
         
             valores.forEach(val => {
                 html += `<tr>
+                    <td>${val.codAluno}</td>
                     <td>${val.nome}</td>
                     <td>${val.sobrenome}</td>
                     <td>${val.matricula}</td>

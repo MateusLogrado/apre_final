@@ -40,7 +40,7 @@ e.preventDefault()
     })
         .then(resp => resp.body)
         .then(() => {
-            res.innerHTML = `<table border="1">
+            res.innerHTML = `<table>
           <tr>
             <th>Data da Solicitação</th>
             <th>Hora de Saída</th>
