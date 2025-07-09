@@ -6,16 +6,11 @@ button.addEventListener("click", (e)=>{
 
     let codAluno = Number(document.getElementById("id").value)
 
-    const valores = {
-        codAluno: codAluno,
-    }
-
     fetch(`http://localhost:8081/aluno/${codAluno}`, {
         method: "DELETE",
         headers: {
             "Content-Type":"Application/JSON"
-        },
-        body: JSON.stringify(valores)
+        }
     })
     .then(resp => {
         if(resp.status === 201){

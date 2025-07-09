@@ -4,13 +4,9 @@ let res = document.getElementById("res")
 button.addEventListener("click", (e)=>{
     e.preventDefault()
 
-    let codProfessor = Number(document.getElementById("id").value)
+    let codSaida = Number(document.getElementById("id").value)
 
-    const valores = {
-        codProfessor: codProfessor,
-    }
-
-    fetch(`http://localhost:8081/professor/${codProfessor}`, {
+    fetch(`http://localhost:8081/saida/${codSaida}`, {
         method: "DELETE",
         headers: {
             "Content-Type":"Application/JSON"
