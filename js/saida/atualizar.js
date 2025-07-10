@@ -57,7 +57,9 @@ button.addEventListener("click", (e) => {
             <th>Destino</th>
             <th>Status</th>
             <th>Aluno</th>
+            <th>codigo do Aluno</th>
             <th>Professor</th>
+            <th>Codigo do Professor</th>
   </tr>
   <tr>
             <td>${codSaida}</td>
@@ -68,7 +70,9 @@ button.addEventListener("click", (e) => {
             <td>${localDestino}</td>
             <td>${status}</td>
             <td>${nomeAluno}</td>
+            <td>${aluno_cod}</td>
             <td>${nomeProfessor}</td>
+            <td>${professor_cod}</td>
   </tr>
 </table>`
         })
