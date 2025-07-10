@@ -8,15 +8,23 @@ button.addEventListener("click", (e) => {
     switch (listaOnline) {
         case "todos":
             todos()
-            break;
-        case "pendentes":
-            pendente()
-            console.log("chamando pedentes()")
-            break;
-    } 
+            break
+        case "pendente":
+            listarPorStatus("pendente")
+            break
+        case "fora":
+            listarPorStatus("fora")
+            break
+        case "finalizado":
+            listarPorStatus("finalizado")
+            break
+        case "rejeitado":
+            listarPorStatus("rejeitado")
+            break
+    }
 })
 
-function todos(){
+function todos() {
     fetch("http://localhost:8081/saida", {
         method: "GET",
         headers: {
@@ -50,7 +58,7 @@ function todos(){
                 <td>${val.nomeAluno}</td>
                 <td>${val.nomeProfessor}</td>
             </tr>`
-        });
+        })
 
         html += `</table>`
         res.innerHTML = html
@@ -60,7 +68,7 @@ function todos(){
     })
 }
 
-function pendente(){
+function listarPorStatus(statusAlvo) {
     fetch("http://localhost:8081/saida", {
         method: "GET",
         headers: {
@@ -81,8 +89,9 @@ function pendente(){
                 <th>Aluno</th>
                 <th>Professor</th>
             </tr>`
+
         valores.forEach(val => {
-            if (val.status === "pendente") {
+            if (val.status.trim().toLowerCase() === statusAlvo) {
                 html += `<tr>
                     <td>${val.codSaida}</td>               
                     <td>${val.dataSolicitacao}</td>
@@ -95,7 +104,7 @@ function pendente(){
                     <td>${val.nomeProfessor}</td>
                 </tr>`
             }
-        });
+        })
 
         html += `</table>`
         res.innerHTML = html
