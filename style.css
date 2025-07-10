@@ -116,3 +116,18 @@ td, th{
     margin-top: 30px;
     color: white;
 }
+
+#listaOnline {
+    display: block;
+    margin: 20px auto;
+}
+
+#listaOnline {
+    background-color: #ff69b4;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 1em;
+    font-family: Arial, sans-serif;
+}
