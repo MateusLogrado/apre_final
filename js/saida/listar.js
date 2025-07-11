@@ -10,16 +10,16 @@ button.addEventListener("click", (e) => {
             todos()
             break
         case "pendente":
-            listarPorStatus("pendente")
+            listarPorStatus()
             break
         case "fora":
-            listarPorStatus("fora")
+            listarPorStatus()
             break
         case "finalizado":
-            listarPorStatus("finalizado")
+            listarPorStatus()
             break
         case "rejeitado":
-            listarPorStatus("rejeitado")
+            listarPorStatus()
             break
     }
 })
@@ -68,7 +68,7 @@ function todos() {
     })
 }
 
-function listarPorStatus(statusAlvo) {
+function listarPorStatus() {
     fetch("http://localhost:8081/saida", {
         method: "GET",
         headers: {
@@ -88,10 +88,11 @@ function listarPorStatus(statusAlvo) {
                 <th>Status</th>
                 <th>Aluno</th>
                 <th>Professor</th>
-            </tr>`
-
+                <th>Ações</th>
+            </tr>`;
+    
         valores.forEach(val => {
-            if (val.status.trim().toLowerCase() === statusAlvo) {
+            if (val.status === "pendente") {
                 html += `<tr>
                     <td>${val.codSaida}</td>               
                     <td>${val.dataSolicitacao}</td>
@@ -102,13 +103,18 @@ function listarPorStatus(statusAlvo) {
                     <td>${val.status}</td>
                     <td>${val.nomeAluno}</td>
                     <td>${val.nomeProfessor}</td>
-                </tr>`
+                    <td>
+                        <button id="aprovar">Aprovar</button>
+                        <button id="rejeitar">Rejeitar</button>
+                    </td>
+                </tr>`;
             }
-        })
-
-        html += `</table>`
-        res.innerHTML = html
+        });
+    
+        html += `</table>`;
+        res.innerHTML = html;
     })
+    
     .catch(err => {
         console.error("Erro:", err)
     })
