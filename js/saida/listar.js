@@ -31,9 +31,9 @@ function todos() {
             "Content-Type": "application/json"
         }
     })
-    .then(resp => resp.json())
-    .then(valores => {
-        let html = `<table>
+        .then(resp => resp.json())
+        .then(valores => {
+            let html = `<table>
             <tr>
                 <th>Código</th>
                 <th>Data da Solicitação</th>
@@ -45,9 +45,9 @@ function todos() {
                 <th>Aluno</th>
                 <th>Professor</th>
             </tr>`
-        
-        valores.forEach(val => {
-            html += `<tr>
+
+            valores.forEach(val => {
+                html += `<tr>
                 <td>${val.codSaida}</td>               
                 <td>${val.dataSolicitacao}</td>
                 <td>${val.horaSaida}</td>
@@ -58,14 +58,14 @@ function todos() {
                 <td>${val.nomeAluno}</td>
                 <td>${val.nomeProfessor}</td>
             </tr>`
-        })
+            })
 
-        html += `</table>`
-        res.innerHTML = html
-    })
-    .catch(err => {
-        console.error("Erro:", err)
-    })
+            html += `</table>`
+            res.innerHTML = html
+        })
+        .catch(err => {
+            console.error("Erro:", err)
+        })
 }
 
 function listarPorStatus() {
@@ -75,9 +75,9 @@ function listarPorStatus() {
             "Content-Type": "application/json"
         }
     })
-    .then(resp => resp.json())
-    .then(valores => {
-        let html = `<table>
+        .then(resp => resp.json())
+        .then(valores => {
+            let html = `<table>
             <tr>
                 <th>Código</th>
                 <th>Data da Solicitação</th>
@@ -89,33 +89,74 @@ function listarPorStatus() {
                 <th>Aluno</th>
                 <th>Professor</th>
                 <th>Ações</th>
-            </tr>`;
-    
-        valores.forEach(val => {
-            if (val.status === "pendente") {
-                html += `<tr>
-                    <td>${val.codSaida}</td>               
-                    <td>${val.dataSolicitacao}</td>
-                    <td>${val.horaSaida}</td>
-                    <td>${val.horaRetorno}</td>
-                    <td>${val.motivo}</td>
-                    <td>${val.localDestino}</td>
-                    <td>${val.status}</td>
-                    <td>${val.nomeAluno}</td>
-                    <td>${val.nomeProfessor}</td>
-                    <td>
-                        <button id="aprovar">Aprovar</button>
-                        <button id="rejeitar">Rejeitar</button>
-                    </td>
-                </tr>`;
-            }
-        });
-    
-        html += `</table>`;
-        res.innerHTML = html;
-    })
-    
-    .catch(err => {
-        console.error("Erro:", err)
-    })
+            </tr>`
+
+            valores.forEach(val => {
+                const status = val.status.trim().toLowerCase();
+            
+                if (status === "pendente") {
+                    html += `<tr>
+                        <td>${val.codSaida}</td>               
+                        <td>${val.dataSolicitacao}</td>
+                        <td>${val.horaSaida}</td>
+                        <td>${val.horaRetorno}</td>
+                        <td>${val.motivo}</td>
+                        <td>${val.localDestino}</td>
+                        <td>${val.status}</td>
+                        <td>${val.nomeAluno}</td>
+                        <td>${val.nomeProfessor}</td>
+                        <td>
+                            <button class="aprovar" data-id="${val.codSaida}">Aprovar</button>
+                            <button class="rejeitar" data-id="${val.codSaida}">Rejeitar</button>
+                        </td>
+                    </tr>`
+                } else if (status === "fora") {
+                    html += `<tr>
+                        <td>${val.codSaida}</td>               
+                        <td>${val.dataSolicitacao}</td>
+                        <td>${val.horaSaida}</td>
+                        <td>${val.horaRetorno}</td>
+                        <td>${val.motivo}</td>
+                        <td>${val.localDestino}</td>
+                        <td>${val.status}</td>
+                        <td>${val.nomeAluno}</td>
+                        <td>${val.nomeProfessor}</td>
+                        <td>
+                            <button class="finalizar" data-id="${val.codSaida}">Finalizar saída</button>
+                        </td>
+                    </tr>`
+                }else if (status === "finalizado") {
+                    html += `<tr>
+                        <td>${val.codSaida}</td>               
+                        <td>${val.dataSolicitacao}</td>
+                        <td>${val.horaSaida}</td>
+                        <td>${val.horaRetorno}</td>
+                        <td>${val.motivo}</td>
+                        <td>${val.localDestino}</td>
+                        <td>${val.status}</td>
+                        <td>${val.nomeAluno}</td>
+                        <td>${val.nomeProfessor}</td>
+                    </tr>`
+                }else if (status === "rejeitado") {
+                    html += `<tr>
+                        <td>${val.codSaida}</td>               
+                        <td>${val.dataSolicitacao}</td>
+                        <td>${val.horaSaida}</td>
+                        <td>${val.horaRetorno}</td>
+                        <td>${val.motivo}</td>
+                        <td>${val.localDestino}</td>
+                        <td>${val.status}</td>
+                        <td>${val.nomeAluno}</td>
+                        <td>${val.nomeProfessor}</td>
+                    </tr>`
+                }
+            })
+
+            html += `</table>`;
+            res.innerHTML = html;
+        })
+
+        .catch(err => {
+            console.error("Erro:", err)
+        })
 }
