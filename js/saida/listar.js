@@ -68,9 +68,9 @@ function listarPorStatus() {
             "Content-Type": "application/json"
         }
     })
-    .then(resp => resp.json())
-    .then(valores => {
-        let html = `<table>
+        .then(resp => resp.json())
+        .then(valores => {
+            let html = `<table>
             <tr>
                 <th>Código</th>
                 <th>Data da Solicitação</th>
@@ -84,11 +84,11 @@ function listarPorStatus() {
                 <th>Ações</th>
             </tr>`
 
-        valores.forEach(val => {
-            const status = val.status.trim().toLowerCase()
+            valores.forEach(val => {
+                const status = val.status.trim().toLowerCase()
 
-            if (status === statusAlvo) {
-                html += `<tr>
+                if (status === statusAlvo) {
+                    html += `<tr>
                     <td>${val.codSaida}</td>               
                     <td>${val.dataSolicitacao}</td>
                     <td>${val.horaSaida}</td>
@@ -99,27 +99,27 @@ function listarPorStatus() {
                     <td>${val.nomeAluno}</td>
                     <td>${val.nomeProfessor}</td>`
 
-                if (status === "pendente") {
-                    html += `<td>
+                    if (status === "pendente") {
+                        html += `<td>
                         <button class="aprovar" data-id="${val.codSaida}">Aprovar</button>
                         <button class="rejeitar" data-id="${val.codSaida}">Rejeitar</button>
                     </td>`
-                } else if (status === "fora") {
-                    html += `<td>
+                    } else if (status === "fora") {
+                        html += `<td>
                         <button class="finalizar" data-id="${val.codSaida}">Finalizar saída</button>
                     </td>`
-                } else {
-                    html += `<td>-</td>`
+                    } else {
+                        html += `<td>-</td>`
+                    }
+
+                    html += `</tr>`
                 }
+            });
 
-                html += `</tr>`
-            }
-        });
-
-        html += `</table>`
-        res.innerHTML = html
-    })
-    .catch(err => {
-        console.error("Erro:", err)
-    })
+            html += `</table>`
+            res.innerHTML = html
+        })
+        .catch(err => {
+            console.error("Erro:", err)
+        })
 }

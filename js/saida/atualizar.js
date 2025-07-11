@@ -6,17 +6,18 @@ button.addEventListener("click", (e) => {
     e.preventDefault()
 
     let codSaida = Number(document.getElementById("codSaida").value)
-    
+
 
     let dataSolicitacao = document.getElementById("dataSolicitacao").value
     const dataAgora = String(dataSolicitacao)
-    const data = dataAgora.slice(0,10)
+    const data = dataAgora.slice(0, 10)
     console.log(data)
 
     let horaSaida = document.getElementById("horaSaida").value
     let horaRetorno = document.getElementById("horaRetorno").value
     let motivo = document.getElementById("motivo").value
     let localDestino = document.getElementById("localDestino").value
+    let status = document.getElementById("status").value
     let nomeAluno = document.getElementById("nomeAluno").value
     let aluno_cod = document.getElementById("aluno_id").value
     let nomeProfessor = document.getElementById("nomeProfessor").value
@@ -28,6 +29,7 @@ button.addEventListener("click", (e) => {
         horaRetorno: horaRetorno,
         motivo: motivo,
         localDestino: localDestino,
+        status: status,
         nomeAluno: nomeAluno,
         aluno_cod: aluno_cod,
         nomeProfessor: nomeProfessor,
@@ -53,6 +55,7 @@ button.addEventListener("click", (e) => {
             <th>Hora de Retorno</th>
             <th>Motivo</th>
             <th>Destino</th>
+            <th>Status</th>
             <th>Aluno</th>
             <th>codigo do Aluno</th>
             <th>Professor</th>
@@ -65,6 +68,7 @@ button.addEventListener("click", (e) => {
             <td>${horaRetorno}</td>
             <td>${motivo}</td>
             <td>${localDestino}</td>
+            <td>${status}</td>
             <td>${nomeAluno}</td>
             <td>${aluno_cod}</td>
             <td>${nomeProfessor}</td>
@@ -74,7 +78,7 @@ button.addEventListener("click", (e) => {
         })
 })
 
-buscar.addEventListener("click", (e)=>{
+buscar.addEventListener("click", (e) => {
     e.preventDefault()
 
     let codSaida = Number(document.getElementById("codSaida").value)
@@ -84,6 +88,7 @@ buscar.addEventListener("click", (e)=>{
     let horaRetorno = document.getElementById("horaRetorno")
     let motivo = document.getElementById("motivo")
     let localDestino = document.getElementById("localDestino")
+    let status = document.getElementById("status")
     let nomeAluno = document.getElementById("nomeAluno")
     let nomeProfessor = document.getElementById("nomeProfessor")
 
@@ -102,10 +107,11 @@ buscar.addEventListener("click", (e)=>{
             horaSaida.value = val.horaSaida
             motivo.value = val.motivo
             localDestino.value = val.localDestino
+            status.value = val.status
             nomeAluno.value = val.nomeAluno
             nomeProfessor.value = val.nomeProfessor
         })
-    .catch((err)=>{
-        console.error("Erro: ", err)
-    })
+        .catch((err) => {
+            console.error("Erro: ", err)
+        })
 })
