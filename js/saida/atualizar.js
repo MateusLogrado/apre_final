@@ -100,14 +100,6 @@ buscar.addEventListener("click", (e) => {
     })
         .then(resp => resp.json())
         .then(val => {
-            dataSolicitacao.value = val.dataSolicitacao
-            horaRetorno.value = val.horaRetorno
-            horaSaida.value = val.horaSaida
-            motivo.value = val.motivo
-            localDestino.value = val.localDestino
-            status.value = val.status
-            nomeAluno.value = val.nomeAluno
-            nomeProfessor.value = val.nomeProfessor
             fetch("http://localhost:8081/aluno", {
                 method: "GET",
                 headers: {
@@ -115,7 +107,31 @@ buscar.addEventListener("click", (e) => {
                 }
             })
                 .then(resp => resp.json())
-                .then()
+                .then(alunos => {
+                    const alunoExistente = alunos.find(alu =>
+                        alu.nome.trim().toLowerCase() === val.nomeProfessor.trim().toLowerCase()
+                    )
+                    fetch("http://localhost:8081/saida", {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json"
+                        }})
+                        .then(resp => resp.json())
+                        .then(professores => {
+                            const professorExistente = professor.find(prof =>
+                                prof.nome.trim().toLowerCase() === val.nomeProfessor.trim().toLowerCase()
+                            )
+                            dataSolicitacao.value = val.dataSolicitacao
+                            horaRetorno.value = val.horaRetorno
+                            horaSaida.value = val.horaSaida
+                            motivo.value = val.motivo
+                            localDestino.value = val.localDestino
+                            status.value = val.status
+                            nomeAluno.value = val.nomeAluno
+
+                            nomeProfessor.value = val.nomeProfessor
+                        })
+                })
                 .catch((err) => {
                     console.error("Erro: ", err)
                 })
