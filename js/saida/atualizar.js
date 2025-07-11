@@ -9,9 +9,7 @@ button.addEventListener("click", (e) => {
 
 
     let dataSolicitacao = document.getElementById("dataSolicitacao").value
-    const dataAgora = String(dataSolicitacao)
-    const data = dataAgora.slice(0, 10)
-    console.log(data)
+    console.log(dataSolicitacao)
 
     let horaSaida = document.getElementById("horaSaida").value
     let horaRetorno = document.getElementById("horaRetorno").value
@@ -24,7 +22,7 @@ button.addEventListener("click", (e) => {
     let professor_cod = document.getElementById("professor_id").value
 
     const valores = {
-        dataSolicitacao: data,
+        dataSolicitacao: dataSolicitacao,
         horaSaida: horaSaida,
         horaRetorno: horaRetorno,
         motivo: motivo,
@@ -63,7 +61,7 @@ button.addEventListener("click", (e) => {
   </tr>
   <tr>
             <td>${codSaida}</td>
-            <td>${data}</td>
+            <td>${dataSolicitacao}</td>
             <td>${horaSaida}</td>
             <td>${horaRetorno}</td>
             <td>${motivo}</td>
@@ -110,6 +108,8 @@ buscar.addEventListener("click", (e) => {
             status.value = val.status
             nomeAluno.value = val.nomeAluno
             nomeProfessor.value = val.nomeProfessor
+
+            
         })
         .catch((err) => {
             console.error("Erro: ", err)

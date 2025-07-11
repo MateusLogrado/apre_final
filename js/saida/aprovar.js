@@ -3,49 +3,67 @@ document.addEventListener("click", function (e) {
         let id = Number(e.target.dataset.id)
         console.log("Aprovar ID:", id)
 
-        // Buscar os dados do registro clicado (opcional, se necessário)
         fetch(`http://localhost:8081/saida/${id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
             }
         })
-        .then(resp => resp.json())
-        .then(val => {
-            const body = {
-                dataSolicitacao: val.dataSolicitacao,
-                horaSaida: val.horaSaida,
-                horaRetorno: val.horaRetorno,
-                motivo: val.motivo,
-                localDestino: val.localDestino,
-                status: "aprovado", // Atualiza status aqui
-                nomeAluno: val.nomeAluno,
-                aluno_cod: val.aluno_cod,
-                nomeProfessor: val.nomeProfessor,
-                professor_cod: val.professor_cod
-            };
+            .then(resp => resp.json())
+            .then(val => {
+                console.log("Saída obtida:", val)
+                fetch(`http://localhost:8081/aluno`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                })
+                    .then(resp => resp.json())
+                    .then(alunos => {
+                        const alunoExistente = alunos.find(alu =>
+                            alu.nome.trim().toLowerCase() === val.nomeAluno.trim().toLowerCase()
+                        )
 
-            return fetch(`http://localhost:8081/saida/${id}`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(body)
-            });
-        })
-        .then(resp => {
-            if (!resp.ok) {
-                return resp.text().then(texto => {
-                    throw new Error("Erro do servidor: " + texto);
-                });
-            }
-            return resp.json();
-        })
-        .then(data => {
-            console.log("Atualizado com sucesso:", data);
-        })
-        .catch(err => {
-            console.error("Erro ao atualizar:", err);
-        });
+                        fetch(`http://localhost:8081/professor`, {
+                            method: "GET",
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })
+                            .then(resp => resp.json())
+                            .then(professor => {
+                                const professorExistente = professor.find(prof =>
+                                    prof.nome.trim().toLowerCase() === val.nomeProfessor.trim().toLowerCase()
+                                )
+
+                                const dados = {
+                                    dataSolicitacao: val.dataSolicitacao,
+                                    horaSaida: val.horaSaida,
+                                    horaRetorno: val.horaRetorno,
+                                    motivo: val.motivo,
+                                    localDestino: val.localDestino,
+                                    status: "aprovado",
+                                    nomeAluno: val.nomeAluno,
+                                    aluno_cod: alunoExistente.codAluno,
+                                    nomeProfessor: val.nomeProfessor,
+                                    professor_cod: professorExistente.codProfessor
+                                }
+
+                                fetch(`http://localhost:8081/saida/${id}`, {
+                                    method: "PUT",
+                                    headers: {
+                                        "Content-Type": "Application/JSON"
+                                    },
+                                    body: JSON.stringify(dados)
+                                })
+                                    .then(resp => resp.body)
+                                    .then()
+                                    .catch(err => {
+                                        console.error("Erro:", err)
+                                    })
+                            })
+                    })
+            })
+
     }
-});
+})

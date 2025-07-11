@@ -114,7 +114,7 @@ function listarPorStatus() {
 
                     html += `</tr>`
                 }
-            });
+            })
 
             html += `</table>`
             res.innerHTML = html
