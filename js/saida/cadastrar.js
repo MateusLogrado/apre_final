@@ -10,7 +10,7 @@ e.preventDefault()
     let horaRetorno = document.getElementById("horaRetorno").value
     let motivo = document.getElementById("motivo").value
     let localDestino = document.getElementById("localDestino").value
-    let status = document.getElementById("status").value
+    let status = "pendente"
     let nomeAluno = document.getElementById("nomeAluno").value
     let aluno_cod = Number(document.getElementById("aluno_id").value)
     let nomeProfessor = document.getElementById("nomeProfessor").value

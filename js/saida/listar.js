@@ -9,16 +9,7 @@ button.addEventListener("click", (e) => {
         case "todos":
             todos()
             break
-        case "pendente":
-            listarPorStatus()
-            break
-        case "fora":
-            listarPorStatus()
-            break
-        case "finalizado":
-            listarPorStatus()
-            break
-        case "rejeitado":
+        default:
             listarPorStatus()
             break
     }
@@ -69,15 +60,17 @@ function todos() {
 }
 
 function listarPorStatus() {
+    const statusAlvo = document.getElementById("listaOnline").value
+
     fetch("http://localhost:8081/saida", {
         method: "GET",
         headers: {
             "Content-Type": "application/json"
         }
     })
-        .then(resp => resp.json())
-        .then(valores => {
-            let html = `<table>
+    .then(resp => resp.json())
+    .then(valores => {
+        let html = `<table>
             <tr>
                 <th>Código</th>
                 <th>Data da Solicitação</th>
@@ -91,72 +84,42 @@ function listarPorStatus() {
                 <th>Ações</th>
             </tr>`
 
-            valores.forEach(val => {
-                const status = val.status.trim().toLowerCase();
-            
+        valores.forEach(val => {
+            const status = val.status.trim().toLowerCase()
+
+            if (status === statusAlvo) {
+                html += `<tr>
+                    <td>${val.codSaida}</td>               
+                    <td>${val.dataSolicitacao}</td>
+                    <td>${val.horaSaida}</td>
+                    <td>${val.horaRetorno}</td>
+                    <td>${val.motivo}</td>
+                    <td>${val.localDestino}</td>
+                    <td>${val.status}</td>
+                    <td>${val.nomeAluno}</td>
+                    <td>${val.nomeProfessor}</td>`
+
                 if (status === "pendente") {
-                    html += `<tr>
-                        <td>${val.codSaida}</td>               
-                        <td>${val.dataSolicitacao}</td>
-                        <td>${val.horaSaida}</td>
-                        <td>${val.horaRetorno}</td>
-                        <td>${val.motivo}</td>
-                        <td>${val.localDestino}</td>
-                        <td>${val.status}</td>
-                        <td>${val.nomeAluno}</td>
-                        <td>${val.nomeProfessor}</td>
-                        <td>
-                            <button class="aprovar" data-id="${val.codSaida}">Aprovar</button>
-                            <button class="rejeitar" data-id="${val.codSaida}">Rejeitar</button>
-                        </td>
-                    </tr>`
+                    html += `<td>
+                        <button class="aprovar" data-id="${val.codSaida}">Aprovar</button>
+                        <button class="rejeitar" data-id="${val.codSaida}">Rejeitar</button>
+                    </td>`
                 } else if (status === "fora") {
-                    html += `<tr>
-                        <td>${val.codSaida}</td>               
-                        <td>${val.dataSolicitacao}</td>
-                        <td>${val.horaSaida}</td>
-                        <td>${val.horaRetorno}</td>
-                        <td>${val.motivo}</td>
-                        <td>${val.localDestino}</td>
-                        <td>${val.status}</td>
-                        <td>${val.nomeAluno}</td>
-                        <td>${val.nomeProfessor}</td>
-                        <td>
-                            <button class="finalizar" data-id="${val.codSaida}">Finalizar saída</button>
-                        </td>
-                    </tr>`
-                }else if (status === "finalizado") {
-                    html += `<tr>
-                        <td>${val.codSaida}</td>               
-                        <td>${val.dataSolicitacao}</td>
-                        <td>${val.horaSaida}</td>
-                        <td>${val.horaRetorno}</td>
-                        <td>${val.motivo}</td>
-                        <td>${val.localDestino}</td>
-                        <td>${val.status}</td>
-                        <td>${val.nomeAluno}</td>
-                        <td>${val.nomeProfessor}</td>
-                    </tr>`
-                }else if (status === "rejeitado") {
-                    html += `<tr>
-                        <td>${val.codSaida}</td>               
-                        <td>${val.dataSolicitacao}</td>
-                        <td>${val.horaSaida}</td>
-                        <td>${val.horaRetorno}</td>
-                        <td>${val.motivo}</td>
-                        <td>${val.localDestino}</td>
-                        <td>${val.status}</td>
-                        <td>${val.nomeAluno}</td>
-                        <td>${val.nomeProfessor}</td>
-                    </tr>`
+                    html += `<td>
+                        <button class="finalizar" data-id="${val.codSaida}">Finalizar saída</button>
+                    </td>`
+                } else {
+                    html += `<td>-</td>`
                 }
-            })
 
-            html += `</table>`;
-            res.innerHTML = html;
-        })
+                html += `</tr>`
+            }
+        });
 
-        .catch(err => {
-            console.error("Erro:", err)
-        })
+        html += `</table>`
+        res.innerHTML = html
+    })
+    .catch(err => {
+        console.error("Erro:", err)
+    })
 }
