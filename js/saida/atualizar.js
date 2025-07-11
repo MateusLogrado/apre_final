@@ -108,9 +108,20 @@ buscar.addEventListener("click", (e) => {
             status.value = val.status
             nomeAluno.value = val.nomeAluno
             nomeProfessor.value = val.nomeProfessor
+            fetch("http://localhost:8081/aluno", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+                .then(resp => resp.json())
+                .then()
+                .catch((err) => {
+                    console.error("Erro: ", err)
+                })
+        }
 
-            
-        })
+        )
         .catch((err) => {
             console.error("Erro: ", err)
         })
