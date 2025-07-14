@@ -109,16 +109,19 @@ buscar.addEventListener("click", (e) => {
                 .then(resp => resp.json())
                 .then(alunos => {
                     const alunoExistente = alunos.find(alu =>
-                        alu.nome.trim().toLowerCase() === val.nomeProfessor.trim().toLowerCase()
+                        alu.nome.trim().toLowerCase() === `${val.nomeAluno} ${val.sobrenomeAluno}`.trim().toLowerCase() ||
+                        alu.nome.trim().toLowerCase() === val.nomeAluno.trim().toLowerCase()
                     )
-                    fetch("http://localhost:8081/saida", {
+                    console.log(alunoExistente)
+                    fetch("http://localhost:8081/professor", {
                         method: "GET",
                         headers: {
                             "Content-Type": "application/json"
                         }})
                         .then(resp => resp.json())
                         .then(professores => {
-                            const professorExistente = professor.find(prof =>
+                            const professorExistente = professores.find(prof =>
+                                prof.nome.trim().toLowerCase() === `${val.nomeProfessor} ${val.sobrenomeProfessor}`.trim().toLowerCase() ||
                                 prof.nome.trim().toLowerCase() === val.nomeProfessor.trim().toLowerCase()
                             )
                             dataSolicitacao.value = val.dataSolicitacao
@@ -128,8 +131,12 @@ buscar.addEventListener("click", (e) => {
                             localDestino.value = val.localDestino
                             status.value = val.status
                             nomeAluno.value = val.nomeAluno
-
+                            aluno_id.value = alunoExistente.codAluno
                             nomeProfessor.value = val.nomeProfessor
+                            professor_id.value = professorExistente.codProfessor
+
+                            console.log(professorExistente)
+                            console.log(alunoExistente)
                         })
                 })
                 .catch((err) => {
