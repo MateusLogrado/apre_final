@@ -1,5 +1,5 @@
 document.addEventListener("click", function (e) {
-    if (e.target.classList.contains("aprovar")) {
+    if (e.target.classList.contains("rejeitar")) {
         let id = Number(e.target.dataset.id)
         console.log("Aprovar ID:", id)
 
@@ -45,7 +45,7 @@ document.addEventListener("click", function (e) {
                                     horaRetorno: val.horaRetorno,
                                     motivo: val.motivo,
                                     localDestino: val.localDestino,
-                                    status: "aprovado",
+                                    status: "rejeitado",
                                     nomeAluno: val.nomeAluno,
                                     aluno_cod: alunoExistente.codAluno,
                                     nomeProfessor: val.nomeProfessor,
