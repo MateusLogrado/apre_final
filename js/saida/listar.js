@@ -104,7 +104,7 @@ function listarPorStatus() {
                         <button class="aprovar" data-id="${val.codSaida}">Aprovar</button>
                         <button class="rejeitar" data-id="${val.codSaida}">Rejeitar</button>
                     </td>`
-                    } else if (status === "fora") {
+                    } else if (status === "aprovado") {
                         html += `<td>
                         <button class="finalizar" data-id="${val.codSaida}">Finalizar saída</button>
                     </td>`

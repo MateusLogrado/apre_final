@@ -109,8 +109,8 @@ buscar.addEventListener("click", (e) => {
                 .then(resp => resp.json())
                 .then(alunos => {
                     const alunoExistente = alunos.find(alu =>
-                        alu.nome.trim().toLowerCase() === `${val.nomeAluno} ${val.sobrenomeAluno}`.trim().toLowerCase() ||
-                        alu.nome.trim().toLowerCase() === val.nomeAluno.trim().toLowerCase()
+                        alu.nome.trim().toLowerCase() === val.nomeAluno.trim().toLowerCase() ||
+                        `${alu.nome} ${alu.sobrenome}`.trim().toLowerCase() === val.nomeAluno.trim().toLowerCase()
                     )
                     console.log(alunoExistente)
                     fetch("http://localhost:8081/professor", {
@@ -121,8 +121,8 @@ buscar.addEventListener("click", (e) => {
                         .then(resp => resp.json())
                         .then(professores => {
                             const professorExistente = professores.find(prof =>
-                                prof.nome.trim().toLowerCase() === `${val.nomeProfessor} ${val.sobrenomeProfessor}`.trim().toLowerCase() ||
-                                prof.nome.trim().toLowerCase() === val.nomeProfessor.trim().toLowerCase()
+                                prof.nome.trim().toLowerCase() === val.nomeProfessor.trim().toLowerCase() ||
+                                `${prof.nome} ${prof.sobrenome}`.trim().toLowerCase() === val.nomeProfessor.trim().toLowerCase()
                             )
                             dataSolicitacao.value = val.dataSolicitacao
                             horaRetorno.value = val.horaRetorno
