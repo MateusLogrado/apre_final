@@ -5,19 +5,18 @@ html, body {
     overflow-x: hidden;
 }
 
-body{
+body {
     background-image: linear-gradient(to bottom, black, rgb(129, 2, 66));
     background-repeat: no-repeat;
     size: 100%;
     background-size: cover;
 }
 
-h1{
+h1 {
     text-align: center;
     color: white;
     font-size: 100px;
 }
-
 
 #link {
     display: block;
@@ -80,7 +79,7 @@ h1{
     font-weight: bold;
 }
 
-form{
+form {
     display: flex;
     flex-direction: column;
     width: 250px;
@@ -88,26 +87,35 @@ form{
     align-items: center;
     padding: 2px;
     border-radius: 25px;
-    background:#be83a6;
+    background: #be83a6;
     color: #2d2d2d;
     box-shadow: 0 0 10px #2d2d2d;
-  }
+}
 
-  input, button{
+input, button {
     background-color: black;
     color: white;
     border-radius: 8px;
-  }
+}
 
-  #button {
+#button {
     display: flex;
     justify-content: center;
     margin: 20px auto;
 }
 
-td, th{
-    padding: 8px;
+td, th {
+    padding: 4px; 
     border: 3px solid black;
+    width: auto;
+    text-align: center; 
+    vertical-align: middle; 
+}
+
+td:first-child {
+    width: 60px;
+    height: 60px;
+    padding: 2px; /
 }
 
 #res {
@@ -120,9 +128,6 @@ td, th{
 #listaOnline {
     display: block;
     margin: 20px auto;
-}
-
-#listaOnline {
     background-color: #ff69b4;
     color: white;
     border: none;
